@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Colors.black,
               ),
               hintText: 'Enter your Email',
-             hintStyle: kHintTextStyle,
+              hintStyle: kHintTextStyle,
             ),
           ),
         ),
@@ -52,12 +52,12 @@ class _LoginScreenState extends State<LoginScreen> {
       children: <Widget>[
         Text(
           'Password',
-         style: kLabelStyle,
+          style: kLabelStyle,
         ),
         SizedBox(height: 10.0),
         Container(
           alignment: Alignment.centerLeft,
-         decoration: kBoxDecorationStyle,
+          decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
             obscureText: true,
@@ -73,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Colors.black,
               ),
               hintText: 'Enter your Password',
-             hintStyle: kHintTextStyle,
+              hintStyle: kHintTextStyle,
             ),
           ),
         ),
@@ -89,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: EdgeInsets.only(right: 0.0),
         child: Text(
           'Forgot Password?',
-         style: kLabelStyle,
+          style: kLabelStyle,
         ),
       ),
     );
@@ -115,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           Text(
             'Remember me',
-           style: kLabelStyle,
+            style: kLabelStyle,
           ),
         ],
       ),
@@ -161,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
         SizedBox(height: 20.0),
         Text(
           'Sign in with',
-         // style: kLabelStyle,
+          // style: kLabelStyle,
         ),
       ],
     );
@@ -216,7 +216,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildSignupBtn() {
     return GestureDetector(
-      onTap: (){ Navigator.pushNamed(context, '/signUp');},
+      onTap: () {
+        Navigator.pushNamed(context, '/signUp');
+      },
       child: RichText(
         text: TextSpan(
           children: [
@@ -241,51 +243,49 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
- 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
-        child:  Container(
-              height: double.infinity,
-              child: SingleChildScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 40.0,
-                  vertical: 120.0,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Sign In',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'openSans',
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 30.0),
-                    _buildEmailTF(),
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    _buildPasswordTF(),
-                    _buildForgotPasswordBtn(),
-                    _buildRememberMeCheckbox(),
-                    _buildLoginBtn(),
-                    // GoBack(),
-                    _buildSignInWithText(),
-                    _buildSocialBtnRow(),
-                    _buildSignupBtn(),
-                  ],
-                ),
-              ),
+        child: Container(
+          height: double.infinity,
+          child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
+            padding: EdgeInsets.symmetric(
+              horizontal: 40.0,
+              vertical: 120.0,
             ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Sign In',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'openSans',
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 30.0),
+                _buildEmailTF(),
+                SizedBox(
+                  height: 30.0,
+                ),
+                _buildPasswordTF(),
+                _buildForgotPasswordBtn(),
+                _buildRememberMeCheckbox(),
+                _buildLoginBtn(),
+                // GoBack(),
+                _buildSignInWithText(),
+                _buildSocialBtnRow(),
+                _buildSignupBtn(),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

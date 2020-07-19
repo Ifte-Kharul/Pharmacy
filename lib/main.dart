@@ -10,28 +10,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
-    supportedLocales: [
-          const Locale('en', 'US'), // English
-          
-    ],
+      supportedLocales: [
+        const Locale('en', 'US'), // English
+      ],
       home: MainPage(),
       routes: {
         //'/': (context)=>MainPage(),
-        '/login' :(context)=> LoginScreen(),
-        '/signUp':(context)=>SignupPage(),
-
+        '/login': (context) => LoginScreen(),
+        '/signUp': (context) => SignupPage(),
       },
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           color: Color(0xffDF041A),
-        
         ),
         //canvasColor: KredAccent,
         scaffoldBackgroundColor: Colors.white,
       ),
-      
     );
   }
 }
-
