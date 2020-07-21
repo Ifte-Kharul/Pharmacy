@@ -1,1 +1,1 @@
-hi
+This project is for CSE 2100
