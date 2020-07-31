@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pharmacy/homepage.dart';
 import 'utilities/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 //import './utilities/GoBackButton.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -128,7 +130,10 @@ class _LoginScreenState extends State<LoginScreen> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => print('Login Button Pressed'),
+        onPressed: () {
+          print('Login Button Pressed');
+          Navigator.pushNamed(context, '/homepage');
+        },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),

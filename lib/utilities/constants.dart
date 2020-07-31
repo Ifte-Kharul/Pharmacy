@@ -22,7 +22,11 @@ final kBoxDecorationStyle = BoxDecoration(
     ),
   ],
 );
-const KmainPageButtonStyle = TextStyle(fontWeight: FontWeight.bold,
-fontSize: 15.0,
+const KmainPageButtonStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 15.0,
 );
 const KredAccent = Color(0xffDF041A);
+
+const KTextFieldLevelStyle = TextStyle(
+    fontFamily: 'Montserrat', fontWeight: FontWeight.bold, color: Colors.grey);

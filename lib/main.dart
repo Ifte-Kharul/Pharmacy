@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pharmacy/homepage.dart';
 
 import './login_page.dart';
 import './signUp_page.dart';
@@ -10,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       supportedLocales: [
         const Locale('en', 'US'), // English
       ],
@@ -18,6 +20,7 @@ class MyApp extends StatelessWidget {
         //'/': (context)=>MainPage(),
         '/login': (context) => LoginScreen(),
         '/signUp': (context) => SignupPage(),
+        '/homepage': (context) => HomePage(),
       },
       theme: ThemeData(
         appBarTheme: AppBarTheme(

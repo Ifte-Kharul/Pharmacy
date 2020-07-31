@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "509683641769",
+    "firebase_url": "https://pharmacy-122b4.firebaseio.com",
+    "project_id": "pharmacy-122b4",
+    "storage_bucket": "pharmacy-122b4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:509683641769:android:a121c1621eb404bb7e68b8",
+        "android_client_info": {
+          "package_name": "com.iftekharulislam.pharmacy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "509683641769-d6b0beusbc4iiln6duafn3guuiurulu0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCR-qKwNIZogKxTnzJHOlBktOT5bi3mCVU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "509683641769-d6b0beusbc4iiln6duafn3guuiurulu0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
