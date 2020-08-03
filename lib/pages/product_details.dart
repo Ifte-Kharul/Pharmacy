@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pharmacy/homepage.dart';
+import 'package:pharmacy/pages/homepage.dart';
 import 'package:pharmacy/utilities/constants.dart';
 import 'package:pharmacy/pages/cart.dart';
 
