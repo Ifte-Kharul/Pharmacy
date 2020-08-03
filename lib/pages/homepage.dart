@@ -5,7 +5,7 @@ import 'package:pharmacy/utilities/inkwell.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:pharmacy/utilities/horizontal_list.dart';
 import 'package:pharmacy/utilities/productList.dart';
-import 'package:pharmacy/pages/cart.dart';
+import 'cart.dart';
 
 class HomePage extends StatelessWidget {
   final String mail;

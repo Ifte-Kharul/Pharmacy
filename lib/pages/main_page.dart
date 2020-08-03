@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy/utilities/constants.dart';
-import './common_button.dart';
+import 'package:pharmacy/utilities/common_button.dart';
 
 class MainPage extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,15 +33,21 @@ class MainPage extends StatelessWidget {
               height: 40,
             ),
             CommonButton(
-              bchild: Text('Login',style: KmainPageButtonStyle,),
-              onTap: (){
+              bchild: Text(
+                'Login',
+                style: KmainPageButtonStyle,
+              ),
+              onTap: () {
                 Navigator.pushNamed(context, '/login');
               },
             ),
             CommonButton(
-              bchild: Text('SignUp',style: KmainPageButtonStyle,),
-              onTap: (){
-               Navigator.pushNamed(context, '/signUp');
+              bchild: Text(
+                'SignUp',
+                style: KmainPageButtonStyle,
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, '/signUp');
               },
             ),
           ],
@@ -51,4 +56,3 @@ class MainPage extends StatelessWidget {
     ));
   }
 }
-

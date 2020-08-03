@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pharmacy/homepage.dart';
-import 'utilities/constants.dart';
+import 'package:pharmacy/pages/homepage.dart';
+import 'package:pharmacy/utilities/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import './utilities/GoBackButton.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+//import 'package:intl/intl.dart';
+//import 'package:pharmacy/utilities/GoBackButton.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -11,7 +14,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _auth = FirebaseAuth.instance;
+  final _googleUser = GoogleSignIn();
+  String email;
+  String pass;
   bool _rememberMe = false;
+  bool spiner = false;
+  bool isLoggedIn = false;
 
   Widget _buildEmailTF() {
     return Column(
@@ -42,6 +51,9 @@ class _LoginScreenState extends State<LoginScreen> {
               hintText: 'Enter your Email',
               hintStyle: kHintTextStyle,
             ),
+            onChanged: (value) {
+              email = value;
+            },
           ),
         ),
       ],
@@ -77,6 +89,9 @@ class _LoginScreenState extends State<LoginScreen> {
               hintText: 'Enter your Password',
               hintStyle: kHintTextStyle,
             ),
+            onChanged: (value) {
+              pass = value;
+            },
           ),
         ),
       ],
@@ -103,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Row(
         children: <Widget>[
           Theme(
-            data: ThemeData(unselectedWidgetColor: Colors.white),
+            data: ThemeData(unselectedWidgetColor: Colors.grey),
             child: Checkbox(
               value: _rememberMe,
               checkColor: Colors.green,
@@ -130,9 +145,29 @@ class _LoginScreenState extends State<LoginScreen> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () {
-          print('Login Button Pressed');
-          Navigator.pushNamed(context, '/homepage');
+        onPressed: () async {
+          // HomePage(mail: email);
+          setState(() {
+            spiner = true;
+          });
+          print(email);
+          try {
+            final user = await _auth.signInWithEmailAndPassword(
+                email: email, password: pass);
+
+            if (user != null) {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => HomePage(
+                  mail: email,
+                ),
+              ));
+            }
+            setState(() {
+              spiner = false;
+            });
+          } catch (e) {
+            print(e);
+          }
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
@@ -209,7 +244,18 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           _buildSocialBtn(
-            () => print('Login with Google'),
+            () async {
+              try {
+                await _googleUser.signIn();
+                email = _googleUser.currentUser.email;
+
+                setState(() {
+                  isLoggedIn = true;
+                });
+              } catch (e) {
+                print(e);
+              }
+            },
             AssetImage(
               'images/google.jpg',
             ),
@@ -252,42 +298,45 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Container(
-          height: double.infinity,
-          child: SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(
-              horizontal: 40.0,
-              vertical: 120.0,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Sign In',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: 'openSans',
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
+      body: ModalProgressHUD(
+        inAsyncCall: spiner,
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Container(
+            height: double.infinity,
+            child: SingleChildScrollView(
+              physics: AlwaysScrollableScrollPhysics(),
+              padding: EdgeInsets.symmetric(
+                horizontal: 40.0,
+                vertical: 120.0,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Sign In',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'openSans',
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                SizedBox(height: 30.0),
-                _buildEmailTF(),
-                SizedBox(
-                  height: 30.0,
-                ),
-                _buildPasswordTF(),
-                _buildForgotPasswordBtn(),
-                _buildRememberMeCheckbox(),
-                _buildLoginBtn(),
-                // GoBack(),
-                _buildSignInWithText(),
-                _buildSocialBtnRow(),
-                _buildSignupBtn(),
-              ],
+                  SizedBox(height: 30.0),
+                  _buildEmailTF(),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  _buildPasswordTF(),
+                  _buildForgotPasswordBtn(),
+                  _buildRememberMeCheckbox(),
+                  _buildLoginBtn(),
+                  // GoBack(),
+                  _buildSignInWithText(),
+                  _buildSocialBtnRow(),
+                  _buildSignupBtn(),
+                ],
+              ),
             ),
           ),
         ),

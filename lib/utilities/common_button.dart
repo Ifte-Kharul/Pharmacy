@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+
 class CommonButton extends StatelessWidget {
-  
   final Function onTap;
   final Widget bchild;
-  CommonButton({@required this.bchild,@required this.onTap});
+  CommonButton({@required this.bchild, @required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,6 @@ class CommonButton extends StatelessWidget {
       elevation: 60,
       child: bchild,
       onPressed: onTap,
-      
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(18.0),
         side: BorderSide(

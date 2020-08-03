@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:pharmacy/utilities/constants.dart';
 //import 'utilities/constants.dart';
 //import './utilities/textF.dart';
-import './utilities/GoBackButton.dart';
+import 'package:pharmacy/utilities/GoBackButton.dart';
 import 'package:flutter_rounded_date_picker/rounded_picker.dart';
 //import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -21,6 +22,7 @@ class _SignupPageState extends State<SignupPage> {
   String bdate = 'Select Your Birthday';
   String email;
   String pass;
+  bool spin = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
