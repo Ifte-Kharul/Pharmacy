@@ -8,6 +8,7 @@ import 'package:flutter_rounded_date_picker/rounded_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:pharmacy/pages/homepage.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -107,7 +108,7 @@ class _SignupPageState extends State<SignupPage> {
                       child: TextField(
                         obscureText: false,
                         decoration: InputDecoration(
-                          labelText: 'Email',
+                          labelText: 'Phone(+880)',
                           labelStyle: KTextFieldLevelStyle,
                         ),
                       ),
@@ -191,6 +192,14 @@ class _SignupPageState extends State<SignupPage> {
                           email: email,
                           password: pass,
                         );
+                        if (newUser != null) {
+                          Navigator.of(context)
+                              .pushReplacement(MaterialPageRoute(
+                            builder: (context) => HomePage(
+                              mail: email,
+                            ),
+                          ));
+                        }
                       },
                       colour: KredAccent,
                       lText: 'SIGN UP',

@@ -5,6 +5,8 @@ import 'package:pharmacy/utilities/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+//import 'package:http/http.dart' as http;
 //import 'package:intl/intl.dart';
 //import 'package:pharmacy/utilities/GoBackButton.dart';
 
@@ -15,7 +17,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _auth = FirebaseAuth.instance;
-  final _googleUser = GoogleSignIn();
+  final _googleUser = GoogleSignIn(scopes: ['email']);
+  final _facebookuser = FacebookLogin();
   String email;
   String pass;
   bool _rememberMe = false;
@@ -207,6 +210,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  //social section Start
   Widget _buildSocialBtn(Function onTap, AssetImage logo) {
     return GestureDetector(
       onTap: onTap,
@@ -231,6 +235,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  //facebook button
   Widget _buildSocialBtnRow() {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 30.0),
@@ -238,17 +243,31 @@ class _LoginScreenState extends State<LoginScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           _buildSocialBtn(
-            () => print('Login with Facebook'),
+            () async {
+              FacebookLoginResult result = await _facebookuser.logIn(['email']);
+              FacebookAccessToken accessToken = result.accessToken;
+              email = accessToken.userId;
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => HomePage(
+                  mail: email,
+                ),
+              ));
+            },
             AssetImage(
               'images/facebook.jpg',
             ),
           ),
+          //google button
           _buildSocialBtn(
             () async {
               try {
                 await _googleUser.signIn();
                 email = _googleUser.currentUser.email;
-
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => HomePage(
+                    mail: email,
+                  ),
+                ));
                 setState(() {
                   isLoggedIn = true;
                 });

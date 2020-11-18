@@ -6,9 +6,13 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:pharmacy/utilities/horizontal_list.dart';
 import 'package:pharmacy/utilities/productList.dart';
 import 'cart.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 class HomePage extends StatelessWidget {
   final String mail;
+  final googleUser = GoogleSignIn();
+  final facebookuser = FacebookLogin();
   final _auth = FirebaseAuth.instance;
   HomePage({
     this.mail,
@@ -107,6 +111,8 @@ class HomePage extends StatelessWidget {
                 colour: Colors.green,
                 onPress: () {
                   _auth.signOut();
+                  googleUser.signOut();
+                  facebookuser.logOut();
                   Navigator.pushReplacementNamed(context, '/login');
                 },
               ),
