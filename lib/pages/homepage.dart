@@ -1,21 +1,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmacy/pages/admin.dart';
 import 'package:pharmacy/utilities/constants.dart';
 import 'package:pharmacy/utilities/inkwell.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:pharmacy/utilities/horizontal_list.dart';
 import 'package:pharmacy/utilities/productList.dart';
+import 'admin.dart';
 import 'cart.dart';
+import 'owner_page.dart';
+import 'setting_page.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 class HomePage extends StatelessWidget {
   final String mail;
+  final String userName;
   final googleUser = GoogleSignIn();
   final facebookuser = FacebookLogin();
   final _auth = FirebaseAuth.instance;
   HomePage({
     this.mail,
+    this.userName,
   });
   @override
   Widget build(BuildContext context) {
@@ -58,7 +64,7 @@ class HomePage extends StatelessWidget {
           child: ListView(
             children: <Widget>[
               UserAccountsDrawerHeader(
-                accountName: Text('IfteKharul'),
+                accountName: Text('$userName'),
                 accountEmail: Text('$mail'),
                 currentAccountPicture: GestureDetector(
                   child: CircleAvatar(
@@ -76,7 +82,12 @@ class HomePage extends StatelessWidget {
               InkDrawer(
                 logo: Icons.person,
                 text: Text('My Account'),
-                onPress: () {},
+                onPress: () {
+                  Info(userName, mail);
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => OwnerPage(),
+                  ));
+                },
               ),
               InkDrawer(
                 logo: Icons.home,
@@ -88,6 +99,7 @@ class HomePage extends StatelessWidget {
                 text: Text('My Orders'),
                 onPress: () {},
               ),
+
               InkDrawer(
                 logo: Icons.shopping_cart,
                 text: Text('Cart'),
@@ -100,10 +112,23 @@ class HomePage extends StatelessWidget {
 
               Divider(),
               InkDrawer(
+                logo: Icons.admin_panel_settings,
+                text: Text('Admin Panel'),
+                onPress: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => Admin(),
+                  ));
+                },
+              ),
+              InkDrawer(
                 logo: Icons.settings,
                 text: Text('Settings'),
                 colour: Colors.grey,
-                onPress: () {},
+                onPress: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => SettingPage(),
+                  ));
+                },
               ),
               InkDrawer(
                 logo: Icons.input,

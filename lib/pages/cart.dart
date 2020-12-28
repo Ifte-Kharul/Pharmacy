@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pharmacy/utilities/cart_item.dart';
+import 'paymen_page.dart';
 
 class Cart extends StatefulWidget {
   @override
@@ -42,7 +43,10 @@ class _CartState extends State<Cart> {
             ),
             Expanded(
               child: MaterialButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => Payment()));
+                },
                 child: Text(
                   'CheckOut',
                   style: TextStyle(

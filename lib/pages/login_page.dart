@@ -20,6 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _googleUser = GoogleSignIn(scopes: ['email']);
   final _facebookuser = FacebookLogin();
   String email;
+  String name;
   String pass;
   bool _rememberMe = false;
   bool spiner = false;
@@ -170,6 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
             });
           } catch (e) {
             print(e);
+            setState(() {});
           }
         },
         padding: EdgeInsets.all(15.0),
@@ -247,6 +249,7 @@ class _LoginScreenState extends State<LoginScreen> {
               FacebookLoginResult result = await _facebookuser.logIn(['email']);
               FacebookAccessToken accessToken = result.accessToken;
               email = accessToken.userId;
+
               Navigator.of(context).pushReplacement(MaterialPageRoute(
                 builder: (context) => HomePage(
                   mail: email,
@@ -263,9 +266,11 @@ class _LoginScreenState extends State<LoginScreen> {
               try {
                 await _googleUser.signIn();
                 email = _googleUser.currentUser.email;
+                name = _googleUser.currentUser.displayName;
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) => HomePage(
                     mail: email,
+                    userName: name,
                   ),
                 ));
                 setState(() {
